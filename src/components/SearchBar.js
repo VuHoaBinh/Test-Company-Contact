@@ -1,28 +1,32 @@
-// SearchBar.js
-
 import React, { useState } from "react";
+import TextField from "@mui/material/TextField";
 
 const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const handleSearch = () => {
-    // Perform search based on the searchTerm
-    onSearch(searchTerm);
+    const value = e.target.value;
+    setSearchTerm(value);
+    onSearch(value);
   };
 
   return (
     <div className="search-bar">
-      <input
-        type="text"
+      <TextField
+        id="filled-basic"
         placeholder="Search..."
+        variant="filled"
         value={searchTerm}
         onChange={handleChange}
+        InputProps={{
+          sx: {
+            backgroundColor: "white !important",
+            margin: "10px",
+            border: "none !important",
+          },
+        }}
+        sx={{ width: "100%" }}
       />
-      <button onClick={handleSearch}>Search</button>
     </div>
   );
 };

@@ -14,3 +14,13 @@ export const deleteContact = (id) => ({
   type: "DELETE_CONTACT",
   payload: id,
 });
+
+export const changeTheme = (payload) => ({
+  type: "CHANGE_THEME",
+  payload,
+});
+
+export const findContact = (payload) => ({
+  type: "FIND_CONTACT",
+  payload,
+});

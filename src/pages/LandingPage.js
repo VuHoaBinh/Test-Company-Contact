@@ -1,21 +1,29 @@
 import React, { useState } from "react";
 import ContactTable from "../components/ContactTable";
-import ContactForm from "../components/ContactForm";
 import Button from "@mui/material/Button";
+import ModalUser from "../components/ModalUser";
 
 function LandingPage() {
+  const [open, setOpen] = React.useState(false);
   const [isAddingContact, setAddingContact] = useState(false);
 
+  const handleCancelAddContact = () => {
+    setOpen(false);
+  };
+
   const handleAddContact = () => {
+    setOpen(true);
     setAddingContact(true);
   };
 
-  const handleCancelAddContact = () => {
-    setAddingContact(false);
+  const handleEditContact = (contact) => {
+    setOpen(true);
   };
 
-  const handleSaveContact = () => {
-    setAddingContact(false);
+  const sampleContact = {
+    name: "",
+    email: "",
+    phone: "",
   };
 
   return (
@@ -24,19 +32,15 @@ function LandingPage() {
       <Button
         onClick={handleAddContact}
         variant="contained"
-        style={{ margin: "10px" }}
+        style={{ padding: "20px" }}
       >
         <i className="fa-solid fa-plus" style={{ marginRight: "5px" }}></i>
         Add New Contact
       </Button>
-      {isAddingContact ? (
-        <ContactForm
-          onCancel={handleCancelAddContact}
-          onSave={handleSaveContact}
-        />
-      ) : (
-        <ContactTable />
-      )}
+
+      <ContactTable onEdit={handleEditContact} />
+
+      <ModalUser isOpen={open} onCancel={handleCancelAddContact} />
     </div>
   );
 }
