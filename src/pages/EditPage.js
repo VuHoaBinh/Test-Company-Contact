@@ -23,7 +23,9 @@ function EditPage() {
 
   return (
     <div>
-      <h1>Edit Page</h1>
+      <h1 style={{ textAlign: "center", margin: "10px", marginBottom: "30px" }}>
+        Edit Page
+      </h1>
       <ContactForm
         contact={contact}
         onCancel={handleCancelEdit}

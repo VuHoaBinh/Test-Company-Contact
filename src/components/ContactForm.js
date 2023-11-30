@@ -1,7 +1,9 @@
 import React from "react";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { updateContact } from "../redux/actions";
+import { updateContact, addContact } from "../redux/actions";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 function ContactForm({ contact, onCancel, onSave }) {
   const dispatch = useDispatch();
@@ -16,27 +18,49 @@ function ContactForm({ contact, onCancel, onSave }) {
       if (contact) {
         dispatch(updateContact({ ...contact, ...values }));
       } else {
-        // Logic to handle new contact creation
+        dispatch(addContact(values));
       }
       onSave();
     },
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="name">Name:</label>
-      <input
-        type="text"
-        id="name"
+    <form
+      style={{ textAlign: "center", width: "100%" }}
+      onSubmit={formik.handleSubmit}
+    >
+      <TextField
+        id="outlined-basic"
+        label="Name"
+        variant="outlined"
         name="name"
         onChange={formik.handleChange}
         value={formik.values.name}
       />
-      {/* Similar input fields for email and phone */}
-      <button type="submit">Save</button>
-      <button type="button" onClick={onCancel}>
-        Cancel
-      </button>
+      <TextField
+        id="outlined-basic"
+        label="Email"
+        variant="outlined"
+        name="email"
+        onChange={formik.handleChange}
+        value={formik.values.email}
+      />
+      <TextField
+        id="outlined-basic"
+        label="Phone Number"
+        variant="outlined"
+        name="phone"
+        onChange={formik.handleChange}
+        value={formik.values.phone}
+      />
+      <div style={{ margin: "15px" }}>
+        <Button type="submit" variant="contained" style={{ margin: "15px" }}>
+          Save
+        </Button>
+        <Button type="button" onClick={onCancel} variant="contained">
+          Cancel
+        </Button>
+      </div>
     </form>
   );
 }
