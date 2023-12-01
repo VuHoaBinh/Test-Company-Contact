@@ -14,12 +14,7 @@ function EditPage() {
     history.push("/");
   };
 
-  const contact = {
-    id: 1,
-    name: "John Doe",
-    email: "john@example.com",
-    phone: "123-456-7890",
-  };
+  const contact = useSelector((state) => state.contacts.find((c) => c.id === parseInt(id, 10)));
 
   return (
     <div>
